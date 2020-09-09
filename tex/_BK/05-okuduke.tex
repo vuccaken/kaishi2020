@@ -1,0 +1,65 @@
+%%
+%%     奥付
+%%
+
+%% typeset: latexmk (uplatex -> dvipdfmx)
+\documentclass[uplatex,dvipdfmx]{vkaishi}
+
+\usepackage{vuccaken}
+
+% --------------------------------------
+\begin{document}
+
+% \thispagestyle{empty}
+
+\markboth{}{} % headerのchaper nameとsection nameを消す
+\clearpage % 右開きじゃなくて良い
+
+\noindent%
+{\headfont\large 物理科学研究会の略歴}
+\par\vspace{.5zw}%
+
+\begin{tabular}{ll}
+  \vHistory
+\end{tabular}
+
+\vfill
+
+\noindent%
+\hspace{2zw}{\headfont \vNendo~物理科学研究会誌}
+\par\noindent%
+\hspace{2zw}{\headfont\large \vTitle~\vNumbering}
+
+\vspace{\baselineskip}\vspace{-1zw}
+\hrule\hrule %----
+
+{ %% \setlength の効果範囲
+  \setlength{\tabcolsep}{0em} % tabular horizontal padding
+%
+  \newcolumntype{P}{>{\hspace{2zw}}r}
+  \newcolumntype{R}{>{\:}r}
+  \newcolumntype{L}{>{\hspace{2zw}}l}
+  \noindent
+  \begin{tabularx}{\textwidth}{PRRL}
+    \vPublish
+  \end{tabularx}
+%
+  \par\vspace{1zw}\noindent
+%
+  \begin{tabularx}{\textwidth}{Pl}
+    {\headfont 表紙イラスト}： & \vIllustrator \\
+    {\headfont 編集}： & \vEditor \\
+    {\headfont 発行}： & 立命館大学 物理科学研究会 \\
+      & 〒525-8577~滋賀県~草津市~野路東~1-1-1 \\
+      & 立命館大学~BKC~アクトα~サークルルーム\!6 \\
+      & メール：\url{vuccaken@gmail.com} \\
+      & ホームページ：\url{vuccaken.github.io} \\
+      & Twitter：\url{@vuccaken}
+  \end{tabularx}
+}
+
+\hrule\hrule %----
+
+%% - - - - - - - - - - -
+
+\end{document}

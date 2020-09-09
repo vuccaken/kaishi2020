@@ -1,0 +1,36 @@
+%%
+%%     表紙（ウラ）
+%%
+
+%% typeset: latexmk (uplatex -> dvipdfmx)
+\documentclass[uplatex,dvipdfmx]{vkaishi}
+
+\usepackage{vuccaken}
+
+% --------------------------------------
+\begin{document}
+\clearpage\thispagestyle{empty}\mbox{}\newpage % 空白ページ挿入
+\ifodd\thepage % 裏表紙がeven pageになるよう調整
+  \thispagestyle{empty}\mbox{}\newpage
+\fi
+
+\thispagestyle{empty}
+\quad
+
+\vspace{70truemm}
+
+\begin{center}
+  \ttfamily\bfseries \fontsize{15}{0}\selectfont
+  vuccaken
+  \\ \vspace{1zw}
+  \vYear
+\end{center}
+
+\vspace{5truemm}
+
+\begin{center}
+  \includegraphics[width=.5\textwidth]{img/sakana.png}
+\end{center}
+
+
+\end{document}

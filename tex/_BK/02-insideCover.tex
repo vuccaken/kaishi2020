@@ -1,0 +1,28 @@
+%
+%     表紙（中）
+%
+
+%% typeset: latexmk (uplatex -> dvipdfmx)
+\documentclass[uplatex,dvipdfmx]{vkaishi}
+
+\usepackage{vuccaken}
+
+% --------------------------------------
+\begin{document}
+
+\cleardoublepage
+\thispagestyle{empty}
+
+\begin{center} \ttfamily % font
+  {\fontsize{50}{0}\selectfont \rmfamily \vTitleRoma}\\[3zw]
+  {\fontsize{40}{0}\selectfont \rmfamily \vNumberingRoma}\\
+  \vfill
+  {\fontsize{16}{0}\selectfont BY}\\[0.5zw]
+  {\fontsize{18}{0}\selectfont vuccaken}\\[8zw]
+  {\fontsize{15}{0}\selectfont \vDate}\\[8zw]
+  {\fontsize{15}{0}\selectfont RITSUMEIKAN}\\[4zw]
+  {\fontsize{15}{0}\selectfont AT THE SOCIETY}\\[0.5zw]
+  {\fontsize{15}{0}\selectfont OF PHYSICAL SCIENCES PRESS}
+\end{center}
+
+\end{document}

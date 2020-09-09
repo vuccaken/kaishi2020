@@ -1,0 +1,101 @@
+%%
+%%  vchapterのための、目次のhyperref
+%%
+
+\RequirePackage{hyperref}
+\RequirePackage{pxjahyper}
+
+% \@ifpackageloaded{vuccaken}{}{
+%   \PackageWarningNoLine{v-hyperref}{先に vuccaken.sty を読み込んでください}
+% }
+
+\def\vaddcontentsline#1#2#3#4{% toc, chapter, title, name
+  \begingroup
+    \let\label\@gobble
+    \ifx\@currentHref\@empty
+      \Hy@Warning{%
+        No destination for bookmark of \string\vaddcontentsline,%
+        \MessageBreak destination is added%
+      }%
+      \phantomsection
+    \fi
+    \expandafter\ifx\csname toclevel@#2\endcsname\relax
+      \begingroup
+        \def\Hy@tempa{#1}%
+        \ifx\Hy@tempa\Hy@bookmarkstype
+          \Hy@WarningNoLine{%
+            bookmark level for unknown #2 defaults to 0%
+          }%
+        \else
+          \Hy@Info{bookmark level for unknown #2 defaults to 0}%
+        \fi
+      \endgroup
+      \expandafter\gdef\csname toclevel@#2\endcsname{0}%
+    \fi
+    \edef\Hy@toclevel{\csname toclevel@#2\endcsname}%
+    \Hy@writebookmark{\csname the#2\endcsname}%
+      {#3}%
+      {\@currentHref}%
+      {\Hy@toclevel}%
+      {#1}%
+    \ifHy@verbose
+      \begingroup
+        \def\Hy@tempa{#3}%
+        \@onelevel@sanitize\Hy@tempa
+        \let\temp@online\on@line
+        \let\on@line\@empty
+        \Hy@Info{%
+          bookmark\temp@online:\MessageBreak
+          thecounter {\csname the#2\endcsname}\MessageBreak
+          text {\Hy@tempa}\MessageBreak
+          reference {\@currentHref}\MessageBreak
+          toclevel {\Hy@toclevel}\MessageBreak
+          type {#1}%
+        }%
+      \endgroup
+    \fi
+    \addtocontents{#1}{%
+      \protect\vcontentsline{v#2}{#3}{#4}{\thepage}{\@currentHref} %\protected@file@percent
+    }%
+  \endgroup
+}
+\def\vcontentsline#1#2#3#4#5{%
+  \begingroup
+    \Hy@safe@activestrue
+  \edef\x{\endgroup
+    \def\noexpand\Hy@tocdestname{#5}%
+  }\x
+  \ifx\Hy@tocdestname\ltx@empty
+    \csname l@#1\endcsname{#2}{#3}{#4}%
+  \else
+    \ifcase\Hy@linktoc % none
+      \csname l@#1\endcsname{#2}{#3}{#4}%
+    \or % section  %% 多分ここが実行される
+      \csname l@#1\endcsname{%
+        \hyper@linkstart{link}{\Hy@tocdestname}{#2}\hyper@linkend
+      }{\hyper@linkstart{link}{\Hy@tocdestname}{#3}\hyper@linkend}{#4}%
+    \or % page
+      \def\Hy@temp{#4}%
+      \ifx\Hy@temp\ltx@empty
+        \csname l@#1\endcsname{#2}{#3}{#4}%
+      \else
+        \csname l@#1\endcsname{#2}{#3}{%
+          \hyper@linkstart{link}{\Hy@tocdestname}{#4}\hyper@linkend
+        }%
+      \fi
+    \else % all
+      \def\Hy@temp{#4}%
+      \ifx\Hy@temp\ltx@empty
+        \csname l@#1\endcsname{%
+          \hyper@linkstart{link}{\Hy@tocdestname}{#2}\hyper@linkend
+        }{}%
+      \else
+        \csname l@#1\endcsname{%
+          \hyper@linkstart{link}{\Hy@tocdestname}{#2}\hyper@linkend
+        }{%
+          \hyper@linkstart{link}{\Hy@tocdestname}{#4}\hyper@linkend
+        }%
+      \fi
+    \fi
+  \fi
+}

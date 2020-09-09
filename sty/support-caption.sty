@@ -1,0 +1,17 @@
+%%
+%%  caption.sty の warning: Unknown documentclass を消す。
+%%  参考：https://tex.stackexchange.com/questions/341680/package-caption-warning-unsupported-document-class
+%%
+
+\setlength\abovecaptionskip{\f@size\p@}
+\setlength\belowcaptionskip{0\p@}
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{#1: #2}%
+  \ifdim \wd\@tempboxa >\hsize
+    #1: #2\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}

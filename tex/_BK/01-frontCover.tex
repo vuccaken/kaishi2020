@@ -1,0 +1,70 @@
+%
+%     表紙（表）
+%
+
+%% typeset: latexmk (uplatex -> dvipdfmx)
+\documentclass[uplatex,dvipdfmx]{vkaishi}
+
+\usepackage{vuccaken}
+
+% --------------------------------------
+\begin{document}
+
+\thispagestyle{empty}
+
+%% フォント
+\newcommand\coverFont{\gtfamily}
+\newcommand\coverTitleFont{\rmfamily\bfseries}
+
+\begin{center}
+  {
+    \fontsize{90pt}{0}\selectfont
+    \kanjiskip=.33zw
+    \coverTitleFont \vTitle\\
+  }
+%
+  \vspace{-45pt} % 90pt / 2
+%
+  {
+    \fontsize{18}{0}\selectfont
+    \vspace{-0.5zw}\hfill
+    {\coverFont \vNumbering}\hspace{0.5zw}
+    \vspace{-0.5zw}\\
+  }
+%
+  \vspace{45pt} % 90pt / 2
+%
+  {
+    \fontsize{13}{0}\selectfont \coverFont
+      \vNendo\\
+      物理科学研究会誌
+  }
+%
+  \vfill
+%
+  % \includegraphics[width=0.6\textwidth]{img/negi.png}
+  % \begin{tikzpicture}[inner sep=0pt]
+  %   \node[anchor=south west] (negi) at (0,0)
+  %     {\includegraphics[width=0.6\textwidth]{img/negi.png}};
+  %   \node at (5.2,2.5) {\fontsize{50}{0}\selectfont\tt REIWA};
+  % \end{tikzpicture}
+%
+  \begin{tikzpicture}[inner sep=0pt]
+    % \node at (0,0) {};
+    % \node (negi) at (8,0){\includegraphics[height=0.7\textwidth, frame=1pt]{img/negiR-1024}};
+    \node (image) at (0,0) {\includegraphics[height=0.8\textwidth, frame=1pt]{img/negi.png}};
+  \end{tikzpicture}
+%
+  \vfill
+%
+  {
+    \fontsize{13}{0}\selectfont \coverFont
+      立命館大学 学友会学術部\\
+      物理科学研究会
+  }
+\end{center}
+
+
+\end{document}
+%
+%

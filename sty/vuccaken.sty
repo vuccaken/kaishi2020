@@ -1,0 +1,219 @@
+%%
+%%    This file is "vuccaken.sty"
+%%
+
+\newcommand\vTitle{白夜}
+\newcommand\vTitleRoma{BYAKUYA}
+\newcommand\vNumbering{第五号}
+\newcommand\vNumberingRoma{V}
+\newcommand\vNendo{令和二年度}
+\newcommand\vYear{2020}
+\newcommand\vDate{2020.08.23}
+\newcommand\vEditor{エディタ}
+\newcommand\vIllustrator{イラストレータ}
+\newcommand\vPublish{% tabularx env.
+  2019年 & 12月 & 1日 & 初版発行 \\
+  % 2020年 & 1月 & 1日 & 第2版発行
+}
+\newcommand\vHistory{% tabularx env.
+  1949年 & 核物理研究会として発足 \\
+  1973年 & 現存する最古の会誌 出版 \\
+  2000年 & 物理科学研究会に改名   \\
+  2016年 & 会誌『白夜 第一号』出版 \\
+  2017年 & OB会の開催           \\
+        & 会誌『白夜 第二号』出版 \\
+  2018年 & 会誌『白夜 第三号』出版 \\
+  2019年 & 会誌『白夜 第四号』出版 \\
+        & OB会の開催 \\
+  2020年 & コロナ禍で学園祭中止 \\
+        & 会誌『白夜 第五号』出版
+}
+\newcommand\vuccaken{\@ifstar{物理科学研究会}{vuccaken}}
+
+%% - - - - - - - - - - - - - - - - - - - -
+%%  全体の設定
+%% - - - - - - - - - - - - - - - - - - - -
+
+%% FONT
+% \usepackage[T1]{fontenc} % font encoding を変更: OT1 → T1
+\usepackage{lmodern} % Latin Modern フォントを使う
+\usepackage[expert,deluxe]{otf} % font
+\usepackage[sourcehan,unicode]{pxchfon} % 源ノフォント
+
+% \renewcommand\kanjifamilydefault{\gtdefault} % ゴシック
+% \renewcommand\familydefault{\sfdefault} % sans serif
+% \usepackage{newtxtext,newtxmath} % 数式のフォント
+% \renewcommand{\vEmphFont}{\bfseries}
+\renewcommand{\vEmphFont}{\gtfamily\sffamily} % 強調のフォント
+\renewcommand{\headfont}{\gtfamily\sffamily} % 見出しのフォント
+
+%% 数式
+\usepackage{amsmath,amssymb} % 数式関係
+% \usepackage{amsthm} % theorem, proof env
+% \usepackage{mathtools} % dcases environment
+\usepackage{physics} % 便利パッケージ
+\usepackage{cases} % numcases
+
+%% 図
+\usepackage{graphicx} % 図の挿入
+% \usepackage{wrapfig} % 文章中に図
+\usepackage{here} % option H で図を強制出力
+\usepackage{support-caption} % kill caption warning
+\usepackage{subcaption} % subfigure env
+\captionsetup{labelsep=quad, margin=5zw} % caption setting
+\captionsetup[sub]{subrefformat=parens,labelsep=quad} % subcaption setting
+% \caption@setbool{documentclass}{1}
+% \def\caption@documentclass{beamer}
+
+%% 表
+\usepackage{array}
+\usepackage{tabularx}
+
+%% その他 sty
+\usepackage{enumitem} % enumerate
+\usepackage{url} % URLをそのまま表示してくれる
+% \usepackage{listings,jlisting} % ソースコード表示
+% \usepackage{ascmac} % 枠を作るやつ
+\usepackage{xcolor} % 色を付ける
+\usepackage{tikz} % おえかきできるツール
+
+%% toc
+\setcounter{tocdepth}{2} % 目次にどこまで表示するか
+\newif\iftoc % 目次の出力制御
+\ifmarge\else\toctrue\fi % marge.tex 以外で true
+\newcommand\mokuji[1]{%
+  \iftoc
+    \setcounter{tocdepth}{#1} % 目次に表示する深さ
+    \tableofcontents % 目次出力
+  \fi
+}
+
+%% 名前の間にスペースを入れる
+\newcommand\vmane@space{~}
+\newcommand\vname[2]{#1\vmane@space#2}
+
+
+%% - - - - - - - - - - - - - - - - - - - -
+%%  marge.tex で使用
+%% - - - - - - - - - - - - - - - - - - - -
+
+\ifmarge
+  %% hyperref settings
+  \ifdefined\hypersetup
+    \hypersetup{% pdf設定
+      bookmarksnumbered = true,
+      setpagesize       = false,
+      pdftitle    = {\vTitle~\vNumbering},
+      pdfauthor   = {物理科学研究会},
+      pdfsubject  = {\vNendo~物理科学研究会誌},
+      pdfkeywords = {立命館大学; 学友会学術部; 物理科学研究会; 会誌; \vTitle;},
+    }
+    % \hypersetup{% color
+    %   colorlinks  = true,
+    %   anchorcolor = black,
+    %   linkcolor   = blue,
+    %   citecolor   = green,
+    %   filecolor   = magenta,
+    %   urlcolor    = cyan
+    % }
+    \hypersetup{% 白黒
+      pdfborder  = {0 0 0},
+      colorlinks = false
+    }
+  \fi
+
+  %% switch to read eath content
+  \newif\iffront
+  \newif\ifmain
+  \newif\ifback
+\fi
+
+%% 最強のinputコマンド
+\usepackage{docmute} % \inputを改良
+\newcommand{\vInputTeX}{\@dblarg\v@InputTeX}
+\def\v@InputTeX[#1]#2{%
+  \def\pathToFiles{./tex/#1/}
+  \def\input@path{{\pathToFiles}}
+  \graphicspath{{\pathToFiles}}
+  \input{\pathToFiles#2}
+}
+
+%% - - - - - - - - - - - - - - - - - - - - - - - - -
+%%  本文以外の部分
+%% - - - - - - - - - - - - - - - - - - - - - - - - -
+
+%% 表紙
+%% \includegraphics に枠を付けるoption
+\usepackage[export]{adjustbox}
+
+%% 巻頭言・編集後記
+%% usage: \hensyukoki{巻頭言 or 編集後記}{学部}{名前}{日付}
+\newenvironment{preface}[5]{%
+  \newcommand\pf@name{#1}%
+  \newcommand\pf@position{#2}%
+  \newcommand\pf@belong{#3}%
+  \newcommand\pf@author{#4}%
+  \newcommand\pf@date{#5}%
+  \cleardoublepage%
+  % \section*{\pf@name}\@mkboth{}{\pf@name}% 本文では section
+  \chapter*{\pf@name}\@mkboth{\pf@name}{}% 本文では chapter
+  \addcontentsline{toc}{chapter}{\pf@name}% 目次では chapter
+}{%
+  \begin{flushright}%
+    \vEmphFont
+    \pf@date\par
+    \pf@position\hspace{1zw}\ignorespaces
+    \pf@belong\hspace{1zw}\pf@author
+  \end{flushright}\par%
+}
+
+%% - - - - - - - - - - - - - - - - - - - - - - - - -
+%%  共通：便利マクロ
+%% - - - - - - - - - - - - - - - - - - - - - - - - -
+
+%% 和文の句読点エスケープ用
+\newcommand{\vku}{。}  % 句点
+\newcommand{\vtou}{、} % 読点
+
+%% 数式番号付加
+\def\atag{\refstepcounter{equation}\tag{\theequation}}
+
+%% 単位をローマン体にするコマンド
+\newcommand\tani{\@ifstar\s@tani\ns@tani}
+\newcommand\ns@tani[1]{\,\mathrm{#1}} % star
+\newcommand\s@tani[1]{\,\mathrm{[#1]}} % no star
+
+%% in math environment
+\newcommand\dsum{\sum\limits} % sum in text line
+\newcommand\vc[1]{\vb*#1} % vector
+\newcommand\del\partial
+\newcommand\const{\mathrm{const.}}
+
+% in text line
+\newcommand\QED{\hfill □\par} % put QED
+\newcommand\siki[1]{(\ref{eq:#1})}
+\newcommand\zu[1]{図\ref{fig:#1}}
+\newcommand\hyo[1]{表\ref{tab:#1}}
+\newcommand\ftj[1]{{\vEmphFont #1}}
+
+%% 上付きバー \widebar
+% \usepackage{accents}
+% \renewcommand\bar{\accentset{{\cc@style\underline{\mskip10mu}}}}
+
+%% tikz
+% \usepackage{tikz}
+% \usepackage{xcolor}
+% \usepackage{gnuplot-lua-tikz}
+% \usetikzlibrary{quotes,angles,arrows}
+% \usetikzlibrary{decorations.pathmorphing}
+% \usetikzlibrary{calc}
+
+%% あとで図を入れる目印
+\newcommand\karizu[1]{\begin{center}（図：#1）\end{center}}
+
+
+
+
+%%
+%% EOF
+%%
