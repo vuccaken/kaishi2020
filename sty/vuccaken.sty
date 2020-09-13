@@ -52,7 +52,7 @@
 % \usepackage{amsthm} % theorem, proof env
 % \usepackage{mathtools} % dcases environment
 \usepackage{physics} % 便利パッケージ
-\usepackage{cases} % numcases
+% \usepackage{cases} % numcases
 
 %% 図
 \usepackage{graphicx} % 図の挿入
@@ -68,7 +68,7 @@
 \usepackage{tabularx}
 
 %% その他 sty
-\usepackage{enumitem} % enumerate
+% \usepackage{enumitem} % enumerate
 \usepackage{url} % URLをそのまま表示してくれる
 % \usepackage{listings,jlisting} % ソースコード表示
 % \usepackage{ascmac} % 枠を作るやつ
@@ -116,17 +116,17 @@
   \newif\iffront
   \newif\ifmain
   \newif\ifback
-\fi
 
-%% 最強のinputコマンド
-\usepackage{docmute} % \inputを改良
-\newcommand{\vInputTeX}{\@dblarg\v@InputTeX}
-\def\v@InputTeX[#1]#2{%
-  \def\pathToFiles{./tex/#1/}
-  \def\input@path{{\pathToFiles}}
-  \graphicspath{{\pathToFiles}}
-  \input{\pathToFiles#2}
-}
+  %% 最強のinputコマンド
+  \usepackage{docmute} % \inputを改良
+  \newcommand{\vInputTeX}{\@dblarg\v@InputTeX}
+  \def\v@InputTeX[#1]#2{%
+    \def\pathToFiles{./tex/#1/}
+    \def\input@path{{\pathToFiles}}
+    \graphicspath{{\pathToFiles}}
+    \input{\pathToFiles#2}
+  }
+\fi
 
 %% - - - - - - - - - - - - - - - - - - - - - - - - -
 %%  本文以外の部分
@@ -161,7 +161,7 @@
 
 % in text line
 \newcommand\QED{\hfill □\par} % put QED
-\newcommand\siki[1]{(\ref{eq:#1})}
+\newcommand\siki[1]{\eqref{eq:#1}}
 \newcommand\zu[1]{図\ref{fig:#1}}
 \newcommand\hyo[1]{表\ref{tab:#1}}
 \newcommand\ftj[1]{{\vEmphFont #1}}
