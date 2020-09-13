@@ -7,31 +7,34 @@
 
 % \usepackage{v-hyperref}
 \usepackage{vuccaken}
-\usepackage{sample}
+\usepackage{sample} % Your sty File
 
+\begin{document}
 
-\begin{document} % - - - - - - - 以下本文 - - - - - - - - - -
+%% - - - - - - - - - - - - - - - - - %%
+\vctitle{さんぷる！} % タイトル
+\vcauthor{\vname{中須}{かすみ}} % 名前
+\vcbelong{アイドル学科} % 所属
+\vcgrade{1} % 回生
+%% - - - - - - - - - - - - - - - - - %%
 
 \mokuji{2} % 目次出力
+\vcmaketitle % タイトル出力
 
-%% - - - - - - - - - - - - - - - - - - - - - - - - %%
-\kaishititle
-  {さんぷる！}% タイトル
-  {アイドル学科1回生}% 所属・回生
-  {\vname{中須}{かすみ}}% 名前
-%% - - - - - - - - - - - - - - - - - - - - - - - - %%
+%% - - - - - - - - - 以下本文 - - - - - - - - - - - %%
 
-%
+
+%%
 \section*{はじめに}
 このファイルは，会誌のサンプルです．\par
 参考にしてください．
 
-%
+%%
 \section{セクション}
 会誌で使用しているvkaishiクラスは，jsbookクラスをベースにしています．\par
 テーマが複数ある場合は別ファイルで作成してください．
 
-%
+%%
 \section{Cheat Sheet}
 
 \subsection{数式環境}
@@ -67,10 +70,9 @@
 
 %% 参考文献
 \begin{thebibliography}{99}
-  \item 著者1・著者2，『本のタイトル』，出版社，出版年．
-  \item ページの著者，『ページのタイトル』，最終アクセス日，\\
+  \bibitem{sample-label-1} 著者1・著者2，『本のタイトル』，出版社，出版年．
+  \bibitem{sample-label-2} ページの著者，『ページのタイトル』，最終アクセス日，\\
     （\url{https://vuccaken.github.io}）．
-  % \bibitem{キー1} 著者，『本のタイトル』，出版社，出版年．
 \end{thebibliography}
 
 \end{document} % - - - - - - - - - - - - - - - - - - - - -

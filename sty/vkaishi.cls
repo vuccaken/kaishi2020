@@ -9,8 +9,7 @@
 %% 新規 if 文の宣言
 \newif\ifanalog
 \newif\ifmarge
-\newif\ifcolor
-\colortrue
+
 
 %% vkaishi クラスの新規オプション
 \DeclareOption{analog}{\analogtrue}
@@ -23,6 +22,13 @@
 %% デフォルトでオプションを与えつつ、jsbook クラスをロード。
 \LoadClass[10pt,b5paper,papersize]{jsbook}
 
+
+%% inner margin settings
+\ifanalog\v@add@innermargin\fi
+\newcommand\v@add@innermargin{
+  \addtolength{\oddsidemargin}{10truemm}   % odd(right) page
+  \addtolength{\evensidemargin}{-10truemm} % even(left) page
+}
 
 %% hyperref.styを読み込んでいなくてもOK。
 %% そのときは \texorpdfstring をエスケープ。
@@ -38,7 +44,45 @@
 \newcommand\vEmphFont{\headfont}
 
 %% カラー・白黒の場合分け
-\newcommand{\vColor}[2]{\ifcolor#1\else#2\fi}
+\newif\ifcolor
+\colortrue % default でカラーON
+\newcommand{\vcolor}[2]{\ifcolor#1\else#2\fi}
+
+%% sub tex file での目次出力
+\setcounter{tocdepth}{2} % 目次にどこまで表示するか
+\newif\iftoc % 目次の出力制御
+\ifmarge\else\toctrue\fi % marge.tex 以外で true
+\newcommand\mokuji[1]{%
+  \iftoc
+    \setcounter{tocdepth}{#1} % 目次に表示する深さ
+    \tableofcontents % 目次出力
+  \fi
+}
+
+%% - - - - - - - - - - - - - - - - - - - - - %%
+%% \vcmaketitle の定義
+%% - - - - - - - - - - - - - - - - - - - - - %%
+
+\newcommand\vcmaketitle{
+  \kaishititle{\vc@title}{\vc@belong\vc@grade}{\vc@author}
+  \vctitle{}
+  \vcauthor{}
+  \vcbelong{}
+  \vcgrade{}
+}
+
+\newcommand\vctitle[1]{\renewcommand\vc@title{#1}}
+\newcommand\vc@title{}
+
+\newcommand\vcauthor[1]{\renewcommand\vc@author{#1}}
+\newcommand\vc@author{}
+
+\newcommand\vcbelong[1]{\renewcommand\vc@belong{#1}}
+\newcommand\vc@belong{}
+
+\newcommand\vcgrade[1]{\renewcommand\vc@grade{#1\vc@grade@name}}
+\newcommand\vc@grade{}
+\newcommand\vc@grade@name{回生}
 
 %% - - - - - - - - - - - - - - - - - - - - - %%
 %% 各章のタイトル出力コマンド \kaishititle の定義
@@ -170,6 +214,27 @@
   \def\@noitemerr
     {\@latex@warning{Empty `thebibliography' environment}}%
     \endlist
+}
+
+%% 巻頭言・編集後記
+%% usage: \begin{preface}{巻頭言 or 編集後記}{役職}{学部}{名前}{日付}
+\newenvironment{preface}[5]{%
+  \newcommand\pf@name{#1}%
+  \newcommand\pf@position{#2}%
+  \newcommand\pf@belong{#3}%
+  \newcommand\pf@author{#4}%
+  \newcommand\pf@date{#5}%
+  \cleardoublepage%
+  % \section*{\pf@name}\@mkboth{}{\pf@name}% 本文では section
+  \chapter*{\pf@name}\@mkboth{\pf@name}{}% 本文では chapter
+  \addcontentsline{toc}{chapter}{\pf@name}% 目次では chapter
+}{%
+  \begin{flushright}%
+    \ifdefined\vEmphFont\vEmphFont\else\headfont\fi
+    \pf@date\par
+    \pf@position\hspace{1zw}\ignorespaces
+    \pf@belong\hspace{1zw}\pf@author
+  \end{flushright}\par%
 }
 
 
