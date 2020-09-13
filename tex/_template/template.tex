@@ -8,7 +8,7 @@
 
 % \usepackage{v-hyperref}
 \usepackage{vuccaken}
-\usepackage{template}
+\usepackage{template} % Your sty File
 
 % \analogtrue
 % \colorfalse
@@ -16,16 +16,19 @@
 %% スタイルファイルの読み込み（\usepackage{}）や自作マクロは，
 %% プリアンブル（ここ）ではなく，自分のスタイルファイル（.sty）に書く．
 
-\begin{document}% - - - - - - - 以下本文 - - - - - - - - - -
+\begin{document}
+
+%% - - - - - - - - - - - - - - - - - %%
+\vctitle{会誌原稿テンプレート}% タイトル
+\vcauthor{\vname{テンプレ}{太郎}}% 名前
+\vcbelong{テンプレ科学科}% 所属
+\vcgrade{4}% 回生
+%% - - - - - - - - - - - - - - - - - %%
 
 \mokuji{2} % 目次出力
+\vcmaketitle % タイトル出力
 
-%% - - - - - - - - - - - - - - - - - - - - - - - - %%
-\kaishititle%
-  {会誌原稿テンプレート}% タイトル
-  {テンプレ科学科4回生}% 所属・回生
-  {\vname{テンプレ}{太郎}}% 名前
-%% - - - - - - - - - - - - - - - - - - - - - - - - %%
+%% - - - - - - - - - 以下本文 - - - - - - - - - - - %%
 
 
 %% - - - - - - - - - - - - - - - - - - - - - - - -

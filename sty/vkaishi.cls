@@ -41,6 +41,31 @@
 \newcommand{\vColor}[2]{\ifcolor#1\else#2\fi}
 
 %% - - - - - - - - - - - - - - - - - - - - - %%
+%% \vcmaketitle の定義
+%% - - - - - - - - - - - - - - - - - - - - - %%
+
+\newcommand\vcmaketitle{
+  \kaishititle{\vc@title}{\vc@belong\vc@grade}{\vc@author}
+  \vctitle{}
+  \vcauthor{}
+  \vcbelong{}
+  \vcgrade{}
+}
+
+\newcommand\vctitle[1]{\renewcommand\vc@title{#1}}
+\newcommand\vc@title{}
+
+\newcommand\vcauthor[1]{\renewcommand\vc@author{#1}}
+\newcommand\vc@author{}
+
+\newcommand\vcbelong[1]{\renewcommand\vc@belong{#1}}
+\newcommand\vc@belong{}
+
+\newcommand\vcgrade[1]{\renewcommand\vc@grade{#1\vc@grade@name}}
+\newcommand\vc@grade{}
+\newcommand\vc@grade@name{回生}
+
+%% - - - - - - - - - - - - - - - - - - - - - %%
 %% 各章のタイトル出力コマンド \kaishititle の定義
 %% - - - - - - - - - - - - - - - - - - - - - %%
 
