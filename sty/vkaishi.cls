@@ -24,8 +24,8 @@
 
 
 %% inner margin settings
-\ifanalog\v@set@innermargin\fi
-\newcommand\v@set@innermargin{
+\ifanalog\v@add@innermargin\fi
+\newcommand\v@add@innermargin{
   \addtolength{\oddsidemargin}{10truemm}   % odd(right) page
   \addtolength{\evensidemargin}{-10truemm} % even(left) page
 }
