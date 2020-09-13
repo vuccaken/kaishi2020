@@ -62,8 +62,6 @@
 \usepackage{subcaption} % subfigure env
 \captionsetup{labelsep=quad, margin=5zw} % caption setting
 \captionsetup[sub]{subrefformat=parens,labelsep=quad} % subcaption setting
-% \caption@setbool{documentclass}{1}
-% \def\caption@documentclass{beamer}
 
 %% 表
 \usepackage{array}
@@ -77,16 +75,8 @@
 \usepackage{xcolor} % 色を付ける
 \usepackage{tikz} % おえかきできるツール
 
-%% toc
-\setcounter{tocdepth}{2} % 目次にどこまで表示するか
-\newif\iftoc % 目次の出力制御
-\ifmarge\else\toctrue\fi % marge.tex 以外で true
-\newcommand\mokuji[1]{%
-  \iftoc
-    \setcounter{tocdepth}{#1} % 目次に表示する深さ
-    \tableofcontents % 目次出力
-  \fi
-}
+%% inner margin settings
+\ifanalog\v@set@innermargin\fi
 
 %% 名前の間にスペースを入れる
 \newcommand\vmane@space{~}
@@ -146,26 +136,6 @@
 %% \includegraphics に枠を付けるoption
 \usepackage[export]{adjustbox}
 
-%% 巻頭言・編集後記
-%% usage: \hensyukoki{巻頭言 or 編集後記}{学部}{名前}{日付}
-\newenvironment{preface}[5]{%
-  \newcommand\pf@name{#1}%
-  \newcommand\pf@position{#2}%
-  \newcommand\pf@belong{#3}%
-  \newcommand\pf@author{#4}%
-  \newcommand\pf@date{#5}%
-  \cleardoublepage%
-  % \section*{\pf@name}\@mkboth{}{\pf@name}% 本文では section
-  \chapter*{\pf@name}\@mkboth{\pf@name}{}% 本文では chapter
-  \addcontentsline{toc}{chapter}{\pf@name}% 目次では chapter
-}{%
-  \begin{flushright}%
-    \vEmphFont
-    \pf@date\par
-    \pf@position\hspace{1zw}\ignorespaces
-    \pf@belong\hspace{1zw}\pf@author
-  \end{flushright}\par%
-}
 
 %% - - - - - - - - - - - - - - - - - - - - - - - - -
 %%  共通：便利マクロ
