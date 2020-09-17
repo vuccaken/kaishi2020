@@ -24,7 +24,7 @@
         "%DOC%"
       ],
       "env": {
-        "TEXMFHOME": "./sty//;./tex//;./fonts//;../../sty//;../../tex//;../../fonts//;",
+        // "TEXMFHOME": "./sty//;./tex//;./fonts//;../../sty//;../../tex//;../../fonts//;",
         // "TEXINPUTS": "./sty//;../sty//;../../sty//;./tex//;../../tex//;",
         // "OPENTYPEFONTS": "./fonts//;../fonts//;../../fonts//;"
       }
