@@ -45,6 +45,9 @@ if ($^O eq 'MSWin32') { # Windows の場合
   $pdf_previewer = "xdg-open";
 }
 
+## -c option で消すファイルの拡張子
+$clean_ext = "dvi";
+
 ## --- special settings for kaishi ---
 
 ## スタイルファイル（.sty）を探索する場所（パス）を追加
