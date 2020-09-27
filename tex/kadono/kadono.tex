@@ -1,0 +1,61 @@
+%%
+%%   TEMPLATE of kaishi
+%%   コピペ用
+%%
+
+%% typeset: latexmk (uplatex -> dvipdfmx)
+\documentclass[uplatex,dvipdfmx]{vkaishi}
+
+% \usepackage{v-hyperref}
+\usepackage{vuccaken}
+\usepackage{kadono} % Your sty File
+
+% \analogtrue
+% \colorfalse
+
+%% スタイルファイルの読み込み（\usepackage{}）や自作マクロは，
+%% プリアンブル（ここ）ではなく，自分のスタイルファイル（.sty）に書く．
+
+\begin{document}
+
+%% - - - - - - - - - - - - - - - - - %%
+\vctitle{会誌原稿テンプレート}% タイトル
+\vcauthor{\vname{テンプレ}{太郎}}% 名前
+\vcbelong{テンプレ科学科}% 所属
+\vcgrade{4}% 回生
+%% - - - - - - - - - - - - - - - - - %%
+
+\mokuji{2} % 目次出力
+\vcmaketitle % タイトル出力
+
+%% - - - - - - - - - 以下本文 - - - - - - - - - - - %%
+
+
+%% - - - - - - - - - - - - - - - - - - - - - - - -
+\section*{はじめに}
+%% - - - - - - - - - - - - - - - - - - - - - - - -
+はじめに，背景・導入・目的などを書くとよい．\par
+概要を書いてもよい．
+
+
+%% - - - - - - - - - - - - - - - - - - - - - - - -
+\section{セクション}
+%% - - - - - - - - - - - - - - - - - - - - - - - -
+chapterは使わない\footnote{タイトル出力がchapterに相当します}．\par
+section以下は自由に使ってよし．
+
+
+%% - - - - - - - - - - - - - - - - - - - - - - - -
+%%  参考文献
+%% - - - - - - - - - - - - - - - - - - - - - - - -
+%% \bibitem のlabelはユニークでなければいけないので，各自変更すること．
+%% 著者名+出版年でラベリングするのがおすすめです．
+\begin{thebibliography}{99}
+  \bibitem{label-1} 著者1・著者2，『本のタイトル』，出版社，出版年．
+  \bibitem{label-2} ページの著者，『ページのタイトル』，最終アクセス日，\\（\url{https://vuccaken.github.io}）．
+\end{thebibliography}
+
+\end{document} % - - - - - - - - - - - - - - - - - - - - -
+%%
+%% ファイトだよ！
+%%
