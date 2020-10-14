@@ -77,7 +77,7 @@
     {
       "name": "kaishi",
       "tools": [
-        "replace kuto-ten",
+        // "replace kuto-ten", // 一旦無しで 2020-10-15
         "latexmk (uplatex) for kaishi"
       ],
     },
