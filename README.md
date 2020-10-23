@@ -28,7 +28,7 @@ kaishi/
   |
   |- .gitigunore     % git で無視するファイルを指定
   |- .latexmkrc      % latexmk の設定ファイル
-  `- marge.tex       % 各texファイルをまとめる
+  `- merge.tex       % 各texファイルをまとめる
 ```
 
 
