@@ -11,7 +11,7 @@ latexmkrc
 ## タイプセットしてできたpdfは要らない:
 tex/*/*.pdf
 /*.pdf
-# !marge.pdf
+# !merge.pdf
 
 
 

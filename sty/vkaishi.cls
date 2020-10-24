@@ -8,12 +8,12 @@
 
 %% 新規 if 文の宣言
 \newif\ifanalog
-\newif\ifmarge
+\newif\ifmerge
 
 
 %% vkaishi クラスの新規オプション
 \DeclareOption{analog}{\analogtrue}
-\DeclareOption{marge}{\margetrue}
+\DeclareOption{merge}{\mergetrue}
 
 %% \documentclass で与えたオプションを、jsbook クラスにも与える。
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{jsbook}}
@@ -49,13 +49,15 @@
 \newcommand{\vcolor}[2]{\ifcolor#1\else#2\fi}
 
 %% sub tex file での目次出力
-\setcounter{tocdepth}{2} % 目次にどこまで表示するか
+\setcounter{tocdepth}{2} % 目次に表示する深さ
 \newif\iftoc % 目次の出力制御
-\ifmarge\else\toctrue\fi % marge.tex 以外で true
+\ifmerge\else\toctrue\fi % merge.tex 以外で true
 \newcommand\mokuji[1]{%
   \iftoc
+    \frontmatter % ページ番号ローマ数字
     \setcounter{tocdepth}{#1} % 目次に表示する深さ
     \tableofcontents % 目次出力
+    \mainmatter  % ページ番号アラビア数字
   \fi
 }
 
