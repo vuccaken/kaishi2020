@@ -38,11 +38,122 @@
 \section{量子力学入門}
 %% - - - - - - - - - - - - - - - - - - - - - - - -
 
+%%
+\subsection{系の時間発展の記述}
+
+量子力学において，系の時間発展の記述の仕方には，次の2つの方法がある．
+\begin{itemize}
+  \item シュレーディンガー描像：物理量は時間発展せず，状態が時間発展する．
+  \item ハイゼンベルク描像：状態は時間発展せず，物理量が時間発展する．
+\end{itemize}
+
+シュレーディンガー描像では，よく知られているように，
+系の状態$\ket{\psi(t)}$はシュレーディンガー方程式
+\begin{align}
+  i\hbar \pdv{t} \ket{\psi(t)} = \hat H(t, \hat{\vc x}, \hat{\vc p}) \ket{\psi(t)}
+\end{align}
+に従って時間発展する．
+$\hat H(t, \hat{\vc x}, \hat{\vc p})$は系のハミルトニアンである．
+この方程式を差分化すると
+\begin{align*}
+  i\hbar \frac{\ket{\psi(t + \Delta t)} - \ket{\psi(t)}}{\Delta t}
+  = \hat H(t, \hat{\vc x}, \hat{\vc p}) \ket{\psi(t)}
+\end{align*}
+となり，整理すると
+\begin{align}
+  \ket{\psi(t + \Delta t)}
+  = \qty(1 - \frac{i}{\hbar} \Delta t \hat H(t, \hat{\vc x}, \hat{\vc p})) \ket{\psi(t)}
+\end{align}
+と書ける．
+ここで，ハミルトニアン$\hat H$が時間に依存しないとすると，
+時刻$t_0$から$t$までの状態$\ket{\psi(t_0)}$の時間発展は，
+$t - t_0 = N \Delta t$として
+\begin{align*}
+  \ket{\psi(t)}
+  &= \lim_{N\to\infty} \qty(1 - \frac{i}{\hbar} \frac{(t - t_0)}{N} \hat H(\hat{\vc x}, \hat{\vc p}))^N \ket{\psi(t_0)} \\
+  &= e^{- \frac{i}{\hbar} (t - t_0) \hat H(\hat{\vc x}, \hat{\vc p})} \ket{\psi(t_0)}
+\end{align*}
+と書ける．
+
+このとき，時刻$t_0$で$\hat O(t_0)$であった物理量の時刻$t$での期待値は
+\begin{align}
+  \expval*{\hat O(t)}
+    \equiv \bra{\psi(t)} \hat O(t_0) \ket{\psi(t)}
+    &= \bra{\psi(t_0)} e^{+ \frac{i}{\hbar} (t - t_0) \hat H} \hat O(t_0) e^{- \frac{i}{\hbar} (t - t_0) \hat H} \ket{\psi(t_0)}
+\end{align}
+と書けるが，ここで状態$\ket{\psi(t_0)}$は時刻$t$においても変化しておらず，
+代わりに物理量$\hat O(t_0)$が$\hat O(t)$へと時間発展したとみなすと
+\begin{align}
+  \expval*{\hat O(t)}
+  = \bra{\psi(t_0)} \hat O(t) \ket{\psi(t_0)}
+\end{align}
+と書ける．
+ここで$\hat O(t)$は
+\begin{align}
+  \hat O(t) \equiv e^{+ \frac{i}{\hbar} (t - t_0) \hat H} \hat O(t_0) e^{- \frac{i}{\hbar} (t - t_0) \hat H}
+\end{align}
+である．
+このように，系の状態が時間発展するのではなく，
+代わりに物理量が時間発展するという記述の仕方をハイゼンベルク描像という．
+
+%%
+\subsection{混合状態}
+
 
 
 %% - - - - - - - - - - - - - - - - - - - - - - - -
 \section{統計力学入門}
 %% - - - - - - - - - - - - - - - - - - - - - - - -
+
+以下では，温度$T$で熱平衡状態となっている系（熱浴と部分系）を考える．
+すなわち，巨視的にみると熱浴と部分系の間でエネルギーの移動はないので，
+部分系のハミルトニアンは定常（時間に依存しない）ということになる．
+
+部分系の状態は，エネルギー固有状態$\ket{E_i}$が$\omega(E_i)$の割合で混合されているとすると，そこでの物理量$\hat A$の期待値は
+\begin{align}
+  \expval*{\hat A}
+  &= \sum_i \omega(E_i) \bra{E_i} \hat A \ket{E_i} \\
+  &= \sum_i \frac{e^{-\beta E_i}}{Z} \bra{E_i} \hat A \ket{E_i}
+  = \frac1Z \sum_i \bra{E_i} \hat A e^{-\beta \hat H} \ket{E_i}
+\end{align}
+と書ける．
+
+！！オメガの同定．
+
+%%
+\subsection{虚時間方向の周期}
+
+逆温度$\beta$で熱平衡となっている系において，
+任意の物理量の期待値は，虚時間方向に周期$\hbar\beta$を持つ．
+すなわち
+\begin{align}
+  \expval*{\hat O(t)}_\beta
+  = \expval*{\hat O(t - i\hbar\beta)}_\beta
+  \label{eq:O-period}
+\end{align}
+が成り立つ．
+
+証明は以下のようにして簡単に行うことができる．
+逆温度$\beta$で熱平衡となっている系における，物理量$\hat O(t)$の期待値$\expval*{\hat O(t)}_\beta$は
+\begin{align*}
+  \expval*{\hat O(t)}_\beta
+  &= \sum_n \frac{e^{-\beta E_n}}{Z} \bra{E_n} \hat O(t) \ket{E_n} \\
+  &= \frac1Z \sum_n \bra{E_n} \hat O(t) e^{-\beta \hat H} \ket{E_n} \\
+  &= \frac1Z \sum_n \bra{E_n} e^{-\beta \hat H} e^{+\frac{i}{\hbar}(-i\hbar\beta) \hat H} \hat O(t) e^{-\frac{i}{\hbar}(-i\hbar\beta) \hat H} \ket{E_n} \\
+  &= \frac1Z \sum_n \bra{E_n} e^{-\beta \hat H} \hat O(t - i\hbar\beta) \ket{E_n} \\
+    &= \expval*{\hat O(t - i\hbar\beta)}_\beta
+\end{align*}
+と書ける．
+3行目から4行目への変形では，
+$\hat O(t)$を解析接続することで虚時間方向への時間発展も許した；
+\begin{align}
+  e^{+\frac{i}{\hbar}(-i\hbar\beta) \hat H} \hat O(t) e^{-\frac{i}{\hbar}(-i\hbar\beta) \hat H}
+  = \hat O(t - i\hbar\beta).
+\end{align}
+\QED
+
+この事実は，後にブラックホールが存在する時空の虚時間方向が持つ周期から，その時空が持っている温度を同定する際に用いる．
+すなわち，虚時間方向にある周期を持った時空は，外部から見て，ある有限温度を持った熱浴として観測されることになる．
 
 
 %% - - - - - - - - - - - - - - - - - - - - - - - -
@@ -70,7 +181,7 @@
 
 
 %% - - - - - - - - - - - - - - - - - - - - - - - -
-\section{一般相対論入門}
+\section{ブラックホールの温度}
 %% - - - - - - - - - - - - - - - - - - - - - - - -
 
 
