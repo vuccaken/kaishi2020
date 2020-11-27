@@ -8,44 +8,38 @@
 %% typeset: latexmk (uplatex -> dvipdfmx)
 \documentclass[uplatex,dvipdfmx,merge]{vkaishi}
 
-\analogtrue % ON: paper, OFF: PDF(default)
-% \colorfalse % ON: black-white, OFF: color(default)
+% \analogtrue % ON: paper, OFF: PDF
+% \colorfalse % ON: black-white, OFF: color
 
-% \usepackage{v-hyperref} % 内部でhyperrefを読み込んでる
+% \usepackage{v-hyperref}
 \usepackage{vuccaken}
 
 \usepackage{sample}
 \usepackage{template}
 % \usepackage{nkym}
 
-%% switch to read contents
-\fronttrue
-\maintrue
-\backtrue
 
 \begin{document} % - - - - - - - - - - - - - - - - -
 
-\iffront
-  \frontmatter
-  \vInputTeX[_BK]{01-frontCover}  % 表紙（表）
-  \vInputTeX[_BK]{02-insideCover} % 表紙（中）
-  \vInputTeX[_BK]{03-kantogen}    % 巻頭言
-  \tableofcontents                % 目次
-\fi
+
+\frontmatter
+\vInputTeX[_BK]{01-frontCover}  % 表紙（表）
+\vInputTeX[_BK]{02-insideCover} % 表紙（中）
+\vInputTeX[_BK]{03-kantogen}    % 巻頭言
+\tableofcontents                % 目次
+
 
 \mainmatter
-\ifmain
-  \vInputTeX[_template]{template}
-  \vInputTeX[_sample]{sample}
-  % \vInputTeX{nkym}
-\fi
+\vInputTeX[_template]{template}
+\vInputTeX[_sample]{sample}
+% \vInputTeX{nkym}
 
-\ifback
-  \backmatter
-  \vInputTeX[_BK]{04-hensyukoki} % 編集後記
-  \vInputTeX[_BK]{05-okuduke}    % 奥付
-  \vInputTeX[_BK]{06-backCover}  % 表紙（裏）
-\fi
+
+\backmatter
+\vInputTeX[_BK]{04-hensyukoki} % 編集後記
+\vInputTeX[_BK]{05-okuduke}    % 奥付
+\vInputTeX[_BK]{06-backCover}  % 表紙（裏）
+
 
 \end{document} % - - - - - - - - - - - - - - - - - -
 %%
