@@ -28,7 +28,7 @@
 
 %% inner margin
 \ifanalog% ホチキス留め用のスペース確保
-  \addtolength{\oddsidemargin}{.25 in}   % odd(right) page
+  \addtolength{\oddsidemargin}{.25 in}           % odd(right) page
   \addtolength{\evensidemargin}{-\oddsidemargin} % even(left) page
 \fi
 
