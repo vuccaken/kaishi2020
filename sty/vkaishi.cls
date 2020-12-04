@@ -49,16 +49,23 @@
 \newcommand{\vcolor}[2]{\ifcolor#1\else#2\fi}
 
 %% sub tex file での目次出力
-\setcounter{tocdepth}{2} % 目次に表示する深さ
-\newif\iftoc % 目次の出力制御
-\ifmerge\else\toctrue\fi % merge.tex 以外で true
 \newcommand\mokuji[1]{%
-  \iftoc
+  %% merge.tex では無視
+  \ifmerge\else
     \frontmatter % ページ番号ローマ数字
     \setcounter{tocdepth}{#1} % 目次に表示する深さ
     \tableofcontents % 目次出力
     \mainmatter  % ページ番号アラビア数字
   \fi
+}
+
+\setcounter{tocdepth}{2} % 目次に表示する深さ
+
+%% 最初に現れた \tableofcontents 以外は無視
+\let\old@tableofcontents\tableofcontents
+\renewcommand\tableofcontents{
+  \old@tableofcontents
+  \renewcommand\tableofcontents\relax
 }
 
 %% - - - - - - - - - - - - - - - - - - - - - %%
