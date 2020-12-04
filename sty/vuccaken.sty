@@ -108,16 +108,6 @@
       colorlinks = false
     }
   \fi
-
-  %% 最強のinputコマンド
-  \usepackage{docmute} % \inputを改良
-  \newcommand{\vInputTeX}{\@dblarg\v@InputTeX}
-  \def\v@InputTeX[#1]#2{%
-    \def\pathToFiles{./tex/#1/}
-    \def\input@path{{\pathToFiles}}
-    \graphicspath{{\pathToFiles}}
-    \input{\pathToFiles#2}
-  }
 \fi
 
 %% - - - - - - - - - - - - - - - - - - - - - - - - -

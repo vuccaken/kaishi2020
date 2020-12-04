@@ -70,6 +70,17 @@
   \renewcommand\tableofcontents\relax
 }
 
+%% 最強のinputコマンド
+\RequirePackage{docmute} % document環境が入子になってもOK
+%% \vInputTeX[dir]{file}
+\newcommand{\vInputTeX}{\@dblarg\v@InputTeX}
+\def\v@InputTeX[#1]#2{%
+  \def\pathToFiles{./tex/#1/}
+  \def\input@path{{\pathToFiles}}
+  \graphicspath{{\pathToFiles}}
+  \input{\pathToFiles#2}
+}
+
 %% - - - - - - - - - - - - - - - - - - - - - %%
 %% \maketitle の再定義
 %% - - - - - - - - - - - - - - - - - - - - - %%
