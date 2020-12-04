@@ -78,7 +78,7 @@
   \kaishititle{\@title}{\@belong}{\@author}
   \title{}
   \author{}
-  \belong{}\belongfalse
+  \belong{}{}\belongfalse
 }
 
 %% \title{title of article}
