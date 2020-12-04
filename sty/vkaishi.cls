@@ -62,42 +62,62 @@
 }
 
 %% - - - - - - - - - - - - - - - - - - - - - %%
-%% \vcmaketitle の定義
+%% \maketitle の再定義
 %% - - - - - - - - - - - - - - - - - - - - - %%
 
-\newcommand\vcmaketitle{
-  \kaishititle{\vc@title}{\vc@belong\vc@grade}{\vc@author}
-  \vctitle{}
-  \vcauthor{}
-  \vcbelong{}
-  \vcgrade{}
+\renewcommand\maketitle{
+  \kaishititle{\@title}{\@belong}{\@author}
+  \title{}
+  \author{}
+  \belong{}\belongfalse
 }
 
-\newcommand\vctitle[1]{\renewcommand\vc@title{#1}}
-\newcommand\vc@title{}
+%% \title{title of article}
+\renewcommand\title[1]{\renewcommand\@title{#1}}
+\renewcommand\@title{}
 
-\newcommand\vcauthor[1]{\renewcommand\vc@author{#1}}
-\newcommand\vc@author{}
+%% \author[na]{me} or \author{name}
+\renewcommand\author[2][]{
+  \renewcommand\@author{\vname[#1]{#2}}
+}
+\renewcommand\@author{}
 
-\newcommand\vcbelong[1]{\renewcommand\vc@belong{#1}}
-\newcommand\vc@belong{}
+%% 名前の間にスペースを入れる
+\newcommand\vname[2][]{%
+  \def\temp{#1\relax}%
+  \if\temp\relax\else%
+    #1\name@space%
+  \fi%
+  #2%
+}
+\newcommand\name@space{~}
 
-\newcommand\vcgrade[1]{\renewcommand\vc@grade{#1\vc@grade@name}}
-\newcommand\vc@grade{}
-\newcommand\vc@grade@name{回生}
+%% \belong{学部学科}{学年}
+\newcommand\belong[2]{
+  \renewcommand\@belong{#1\belong@space#2\grade@name}
+  \belongtrue
+}
+\newcommand\@belong{}
 
-%% - - - - - - - - - - - - - - - - - - - - - %%
-%% 各章のタイトル出力コマンド \kaishititle の定義
-%% - - - - - - - - - - - - - - - - - - - - - %%
+\newif\ifbelong
+\newcommand\belong@space{}
+\newcommand\grade@name{回生}
 
-%% \kaishititle{title}{na}{me}
+%% \kaishititle{title}{belong}{name}
 \newcommand{\kaishititle}[3]{%
-  \vchapter{#2\hspace{1zw}#3}{#1}
+  \ifbelong% if #2
+    \vchapter{#2\hspace{1zw}#3}{#1}
+  \else
+    \vchapter{#3}{#1}
+  \fi
   \vspace{-40pt}
   \begin{flushright}
-    {\vEmphFont \large #2} \\ \vspace{3pt} %所属
-    {\vEmphFont \large #3} \\ \vspace{30pt} %名前
-  \end{flushright}}
+    \ifbelong
+      {\vEmphFont\large#2}\\[3pt]% 所属
+    \fi
+    {\vEmphFont\large#3}\\[30pt]% 名前
+  \end{flushright}
+}
 
 %% \vchapter{name}{title}
 \newcommand{\vchapter}[2]{%
