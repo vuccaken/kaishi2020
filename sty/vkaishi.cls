@@ -22,13 +22,15 @@
 %% デフォルトでオプションを与えつつ、jsbook クラスをロード。
 \LoadClass[10pt,b5paper,papersize]{jsbook}
 
+%% reset side margin
+\setlength{\evensidemargin}{0 in}
+\setlength{\oddsidemargin}{0 in}
 
-%% inner margin settings
-\ifanalog\v@add@innermargin\fi
-\newcommand\v@add@innermargin{
-  \addtolength{\oddsidemargin}{10truemm}   % odd(right) page
-  \addtolength{\evensidemargin}{-10truemm} % even(left) page
-}
+%% inner margin
+\ifanalog% ホチキス留め用のスペース確保
+  \addtolength{\oddsidemargin}{.25 in}   % odd(right) page
+  \addtolength{\evensidemargin}{-\oddsidemargin} % even(left) page
+\fi
 
 %% hyperref.styを読み込んでいなくてもOK。
 %% そのときは \texorpdfstring をエスケープ。
