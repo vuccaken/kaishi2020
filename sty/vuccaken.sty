@@ -78,9 +78,8 @@
 %% inner margin settings
 \ifanalog\v@add@innermargin\fi
 
-%% 名前の間にスペースを入れる
-\newcommand\vmane@space{~}
-\newcommand\vname[2]{#1\vmane@space#2}
+%% 名前の間に入れるスペース（\vname[]{}）
+% \renewcommand\mane@space{~}
 
 
 %% - - - - - - - - - - - - - - - - - - - -
@@ -111,11 +110,6 @@
       colorlinks = false
     }
   \fi
-
-  %% switch to read eath content
-  \newif\iffront
-  \newif\ifmain
-  \newif\ifback
 
   %% 最強のinputコマンド
   \usepackage{docmute} % \inputを改良
