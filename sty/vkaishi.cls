@@ -6,6 +6,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{vkaishi}[2020/08/23 vuccaken kaishi class]
 
+\newcommand\vuccaken{物理科学研究会}
+
 %% 新規 if 文の宣言
 \newif\ifanalog
 \newif\ifmerge
@@ -227,8 +229,12 @@
       \penalty\@highpenalty
     \endgroup
   \fi}
-%% - - - end of definition: \kaishititle - - - - -
+%% end of definition: \maketitle
 
+
+%% - - - - - - - - - - - - - - - - - - - - - %%
+%% 参考文献
+%% - - - - - - - - - - - - - - - - - - - - - %%
 
 %% 参考文献の thebibliography 環境は、
 %% デフォだと chapter なので、section に変更
@@ -258,27 +264,33 @@
     \endlist
 }
 
+%% - - - - - - - - - - - - - - - - - - - - - %%
 %% 巻頭言・編集後記
-%% usage: \begin{preface}{巻頭言 or 編集後記}{役職}{学部}{名前}{日付}
-\newenvironment{preface}[5]{%
-  \newcommand\pf@name{#1}%
-  \newcommand\pf@position{#2}%
-  \newcommand\pf@belong{#3}%
-  \newcommand\pf@author{#4}%
-  \newcommand\pf@date{#5}%
+%% - - - - - - - - - - - - - - - - - - - - - %%
+
+\newenvironment{preface}[1]{%
   \cleardoublepage%
-  % \section*{\pf@name}\@mkboth{}{\pf@name}% 本文では section
-  \chapter*{\pf@name}\@mkboth{\pf@name}{}% 本文では chapter
-  \addcontentsline{toc}{chapter}{\pf@name}% 目次では chapter
+  % \section*{#1}\@mkboth{}{#1}% 本文では section
+  \chapter*{#1}\@mkboth{#1}{}% 本文では chapter
+  \addcontentsline{toc}{chapter}{#1}% 目次では chapter
 }{%
-  \begin{flushright}%
-    \ifdefined\vEmphFont\vEmphFont\else\headfont\fi
-    \pf@date\par
-    \pf@position\hspace{1zw}\ignorespaces
-    \pf@belong\hspace{1zw}\pf@author
-  \end{flushright}\par%
+  % \ifdefined\vEmphFont\vEmphFont\else\headfont\fi
+  \vspace{1zw}\par
+  \@date\par
+  \ifbelong
+    \hfill\@position\par
+  \fi
+  \hfill\@author\par
+  \belongfalse
 }
 
+%% 役職
+\newcommand\position[1]{
+  \renewcommand\@position{\vuccaken\position@space#1}
+  \belongtrue
+}
+\newcommand\@position{\@belong}% 役職がなければ所属学科
+\newcommand\position@space{　}
 
 %%
 %%  End of vkaishi.cls
