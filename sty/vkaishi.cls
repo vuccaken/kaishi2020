@@ -281,7 +281,10 @@
     \hfill\@position\par
   \fi
   \hfill\@author\par
-  \belongfalse
+  %% reset
+  \author{}
+  \belong{}{}\belongfalse
+  \position{\@belong}
 }
 
 %% 役職
