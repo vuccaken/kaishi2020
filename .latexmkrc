@@ -65,13 +65,13 @@ my $current_dir = getcwd;
 $merge_file = 'merge.tex';
 if (-e $merge_file) {
   $root_dir = $current_dir;
-} else {
-  $root_dir = "$current_dir/../..";
+} elsif (-e '../../' . $merge_file) {
+  $root_dir = $current_dir . '/../..';
 }
 ## コマンドラインから実行するならこれで十分
 # $root_dir = $current_dir;
 
 ## sty や font を探索するパスを追加
-$ENV{'TEXMFHOME'} = "$root_dir//;";
+$ENV{'TEXMFHOME'} = $root_dir . '//;';
 
-print $ENV{'TEXMFHOME'};
+# print 'set TEXMFHOME: ' . $ENV{'TEXMFHOME'};
