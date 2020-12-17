@@ -4,39 +4,13 @@
 // 「TEX」->「Build LaTeX project」->「Recipe: kaishi」でタイプセットできます。
 //
 {
-  //
-  // latex
-  //
+  // general editor settings
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "all",
+  "editor.wordWrap": "on",
+
+  // latex settings
   "latex-workshop.latex.tools": [
-    // kaishiのため
-    {
-      "name": "latexmk (uplatex) for kaishi",
-      "command": "latexmk",
-      "args": [
-        "-e", "read_first_rc_file_in_list( '../../latexmkrc', '../../.latexmkrc' );",
-        // "-g",
-        // "-e", "$latex                = 'uplatex %O -synctex=1 -file-line-error -halt-on-error %S'",
-        // "-e", "$bibtex               = 'upbibtex %O %B'",
-        // "-e", "$biber                = 'biber %O --bblencoding=utf8 -u -U --output_safechars %B'",
-        // "-e", "$makeindex            = 'upmendex %O -o %D %S'",
-        // "-e", "$dvipdf               = 'dvipdfmx %O -o %D %S';",
-        // "-pdfdvi", // generate pdf by dvipdf
-        "%DOC%"
-      ],
-      "env": {
-        // "TEXMFHOME": "./sty//;./tex//;./fonts//;../../sty//;../../tex//;../../fonts//;",
-        // "TEXINPUTS": "./sty//;../sty//;../../sty//;./tex//;../../tex//;",
-        // "OPENTYPEFONTS": "./fonts//;../fonts//;../../fonts//;"
-      }
-    },
-    { // 句読点置換
-      "name": "replace kuto-ten",
-      "command": "perl",
-      "args": [
-        "-pe", "s/、/，/g; s/。/．/g",
-        "-i", "%DOC_EXT%"
-      ]
-    },
     // latexmk を利用した platex によるビルドコマンド
     {
       "name": "Latexmk (pLaTeX)",
@@ -52,13 +26,6 @@
       "name": "Latexmk (upLaTeX)",
       "command": "latexmk",
       "args": [
-        // "-f",
-        // "-gg",
-        // "-pv", // 生成された pdf を外部 viewer で開く
-        // "-synctex=1", // generate SyncTeX data for previewers
-        // "-file-line-error", // enable file:line:error style messages
-        // "-halt-on-error", // stop processing at the first error
-        // "-interaction=nonstopmode", // non stop mode
         "%DOC%"
       ]
     },
@@ -70,15 +37,34 @@
         "-lualatex",
         "%DOC%"
       ]
+    },
+    {
+      "name": "Latexmk (upLaTeX) for kaishi",
+      "command": "latexmk",
+      "args": [
+        "-e",
+        "read_first_rc_file_in_list( '../../latexmkrc', '../../.latexmkrc' );",
+        "%DOC%"
+      ]
+    },
+    // 句読点置換 (perl command)
+    {
+      "name": "replace kuto-ten",
+      "command": "perl",
+      "args": [
+        "-pe", "s/、/，/g; s/。/．/g",
+        "-i", "%DOC_EXT%"
+      ]
     }
   ],
+  
   "latex-workshop.latex.recipes": [
     // For kaishi (uplatex)
     {
       "name": "kaishi",
       "tools": [
         // "replace kuto-ten", // 一旦無しで 2020-10-15
-        "latexmk (uplatex) for kaishi"
+        "Latexmk (upLaTeX) for kaishi"
       ],
     },
     // LaTeX(pLaTeX) で書かれた文書のビルドレシピ
@@ -106,19 +92,17 @@
   "latex-workshop.latex.recipe.default": "lastUsed", // cmd + opt + B
   "latex-workshop.latex.autoBuild.run": "never", // auto build on saved
   "latex-workshop.latex.autoClean.run": "onBuilt",
-  // "latex-workshop.latex.autoClean.run": "onFailed",
   "latex-workshop.latex.clean.fileTypes": [
     "*.aux",
     "*.toc",
     "*.log",
     "*.dvi",
     "*.out.ps",
-    // "*.synctex.gz",
     "*.fdb_latexmk",
-    "*.fls", // latexmk
+    "*.fls",
     "*.nav",
     "*.snm",
-    "*.out", // beamer
+    "*.out",
     "tex/_BK/*.synctex.gz"
   ],
   "latex-workshop.message.update.show": false,

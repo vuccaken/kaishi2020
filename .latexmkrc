@@ -73,5 +73,7 @@ if (-e $merge_file) {
 
 ## sty や font を探索するパスを追加
 $ENV{'TEXMFHOME'} = $root_dir . '//;';
+# $ENV{'TEXINPUTS'} = $root_dir . '/sty//;' . $root_dir . '/tex//;';
+# $ENV{'OPENTYPEFONTS'} = $root_dir . '/fonts//;';
 
 # print 'set TEXMFHOME: ' . $ENV{'TEXMFHOME'};
