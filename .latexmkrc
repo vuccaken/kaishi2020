@@ -50,30 +50,13 @@ $clean_ext = "dvi";
 
 ## --- special settings for kaishi ---
 
-## スタイルファイル（.sty）を探索する場所（パス）を追加
-# $ENV{'TEXINPUTS'} = './sty//;' . '../sty//;' . '../../sty//;' . './tex//;' . '../../tex//;';
-
-## フォントを探索する場所（パス）を追加
-# $ENV{'OPENTYPEFONTS'} = './fonts//;' . '../fonts//;' . '../../fonts//;';
-
-## カレントディレクトリのパスを取得
-use Cwd;
-my $current_dir = getcwd;
-
-## ルートディレクトリを探る
 ## for vscode
 $merge_file = 'merge.tex';
 if (-e $merge_file) {
-  $root_dir = $current_dir;
+  $root_dir = '.';
 } elsif (-e '../../' . $merge_file) {
-  $root_dir = $current_dir . '/../..';
+  $root_dir = './../..';
 }
-## コマンドラインから実行するならこれで十分
-# $root_dir = $current_dir;
 
 ## sty や font を探索するパスを追加
 $ENV{'TEXMFHOME'} = $root_dir . '//;';
-# $ENV{'TEXINPUTS'} = $root_dir . '/sty//;' . $root_dir . '/tex//;';
-# $ENV{'OPENTYPEFONTS'} = $root_dir . '/fonts//;';
-
-# print 'set TEXMFHOME: ' . $ENV{'TEXMFHOME'};
