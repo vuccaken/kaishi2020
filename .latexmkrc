@@ -66,6 +66,7 @@ $show_time = 1;
 ## --- special settings for kaishi ---
 
 ## for vscode
+## ルートディレクトリの探索
 $merge_file = 'merge.tex';
 if (-e $merge_file) {
   $root_dir = '.';
@@ -73,5 +74,11 @@ if (-e $merge_file) {
   $root_dir = './../..';
 }
 
+## for command line
+# $root_dir = '.';
+
 ## sty や font を探索するパスを追加
-$ENV{'TEXMFHOME'} = $root_dir . '//;';
+if ($root_dir){
+  ensure_path(TEXMFHOME, $root_dir . '//;');
+  # $ENV{'TEXMFHOME'} = $root_dir . '//;'; # 上と同じ意味
+}
