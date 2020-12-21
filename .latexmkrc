@@ -5,9 +5,9 @@ $latex_options = '-synctex=1 -halt-on-error -file-line-error -interaction=nonsto
 
 ## OS 判定
 if ($^O eq 'MSWin32') { # Windows の場合
-  $latex   = "uplatex %O $latex_options -kanji=utf8 -no-guess-input-enc %S";
+  $latex   = "uplatex %O $latex_options -kanji=utf8 -no-guess-input-enc %P";
 } else { # Windows 以外の OS の場合 (Linux, macOS)
-  $latex   = "uplatex %O $latex_options %S";
+  $latex   = "uplatex %O $latex_options %P";
 }
 $pdflatex  = "pdflatex %O $latex_options %S";
 $lualatex  = "lualatex %O $latex_options %S";
@@ -18,6 +18,13 @@ $makeindex = "upmendex %O -o %D %S";
 $dvipdf    = "dvipdfmx %O -o %D %S";
 $dvips     = "dvips %O -z -f %S | convbkmk -u > %D";
 $ps2pdf    = "ps2pdf.exe %O %S %D";
+
+## *latex コマンドの最大実行回数
+$max_repeat = 5;
+
+## tex ソースの前に、tex コマンドを挿入
+## latexmk "$pre_tex_code\input{hoge.tex}"
+# $pre_tex_code = '\AtBeginDocument{An initial message\par}';
 
 ## PDF の作成方法を指定するオプション
 # $pdf_mode = 0; # PDF を作成しません。
@@ -45,8 +52,16 @@ if ($^O eq 'MSWin32') { # Windows の場合
   $pdf_previewer = "xdg-open";
 }
 
+## specify cleanup mode
+# $cleanup_mode = 0; # 何も消さない (default)
+$cleanup_mode = 2; # equivalent to -c option
+
 ## -c option で消すファイルの拡張子
 $clean_ext = "dvi";
+
+## show CPU time used
+$show_time = 1;
+
 
 ## --- special settings for kaishi ---
 
