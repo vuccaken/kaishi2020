@@ -38,12 +38,27 @@
         "%DOC%"
       ]
     },
+    // kaishi のビルドコマンド
     {
       "name": "Latexmk (upLaTeX) for kaishi",
       "command": "latexmk",
       "args": [
         "-e",
         "read_first_rc_file_in_list( '../../latexmkrc', '../../.latexmkrc' );",
+        "%DOC%"
+      ]
+    },
+    // 設定ファイル .latexmkrc 無しの場合
+    {
+      "name": "Latexmk (upLaTeX) for kaishi without RC",
+      "command": "latexmk",
+      "args": [
+        "-norc", // Turn off the automatic reading of initialization (rc) files.
+        "-e", "$latex = 'uplatex %O -synctex=1 -halt-on-error -file-line-error -interaction=nonstopmode %S'",
+        "-e", "$dvipdf = 'dvipdfmx %O -o %D %S';",
+        "-e", "ensure_path(TEXMFHOME, './/;' . '../../sty//;' . '../../fonts//;')",
+        "-pdfdvi",
+        "-time", // Show CPU time used
         "%DOC%"
       ]
     },
@@ -65,6 +80,13 @@
       "tools": [
         // "replace kuto-ten", // 一旦無しで 2020-10-15
         "Latexmk (upLaTeX) for kaishi"
+      ],
+    },
+    // For kaishi (uplatex) without RC file
+    {
+      "name": "kaishi w/o RC",
+      "tools": [
+        "Latexmk (upLaTeX) for kaishi without RC",
       ],
     },
     // LaTeX(pLaTeX) で書かれた文書のビルドレシピ
